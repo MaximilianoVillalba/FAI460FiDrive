@@ -1,5 +1,11 @@
 <?php
 include('estructura/head.php');
+include_once('../control/control_delete_shared.php');
+
+$objeto = new control_delete_shared();
+
+$nameFile = $objeto->devolverDato($_GET);
+
 ?>
 <div class="wrapper">
     <?php include('estructura/up_menu.php') ?>
@@ -11,29 +17,26 @@ include('estructura/head.php');
                     <div class="card-header d-flex justify-content-center">
                         <h3 class="card-title">Formulario de Eliminacion de Compartido</h3>
                     </div>
-                    <form role="form">
+                    <form id="form-carga" method="POST">
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label for="exampleInputEmail1">Nombre del archivo</label>
-                                    <input type="text" class="form-control" value="1234.png">
+                                    <input type="text" class="form-control" value="<?php echo $nameFile ?>" readonly>
                                 </div>
                                 <div class="form-group col-6">
-                                    <label>Cantidad de dias que se comparte</label>
-                                    <input type="text" class="form-control">
+                                    <label>Seleccione usuario que lo carga</label>
+                                    <select class="form-control">
+                                        <option value="" selected>Seleccione usuario</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="visitante">Visitante</option>
+                                        <option value="yo">Yo</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">Motivo por el cual deja de compartir</label>
                                 <textarea class="form-control" cols="10" rows="4"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Seleccione usuario que lo carga</label>
-                                <select class="form-control">
-                                    <option value="administrador" selected>Administrador</option>
-                                    <option value="visitante">Visitante</option>
-                                    <option value="yo">Yo</option>
-                                </select>
                             </div>
                         </div>
                         <div class="m-2 d-flex justify-content-center">

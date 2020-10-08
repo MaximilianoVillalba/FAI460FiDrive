@@ -21,21 +21,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../vista/compartirarchivo.php" class="nav-link">
+                            <a href="../vista/contenido.php" class="nav-link">
                                 <i class="far fa-arrow-alt-circle-right"></i>
-                                <p>Compartir archivo</p>
+                                <p>Lista archivos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../vista/eliminararchivocompartido.php" class="nav-link">
+                            <a href="../vista/compartidos.php" class="nav-link">
                                 <i class="far fa-arrow-alt-circle-right"></i>
-                                <p>Eliminar compartir archivo</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../vista/eliminararchivo.php" class="nav-link">
-                                <i class="far fa-arrow-alt-circle-right"></i>
-                                <p>Eliminar archivo</p>
+                                <p>Lista archivos compartidos</p>
                             </a>
                         </li>
                     </ul>
