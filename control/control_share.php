@@ -12,4 +12,13 @@ class control_share
         $arregloUrl = explode('/', $url);
         return $arregloUrl[3];
     }
+
+    public function traerId($dato)
+    {
+        $id = 0;
+        if (isset($dato['idarchivocargado'])) {
+            $id = $dato['idarchivocargado'];
+        }
+        return $id;
+    }
 }

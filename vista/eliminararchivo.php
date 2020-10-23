@@ -1,11 +1,16 @@
 <?php
+include_once('../configuracion.php');
 include('estructura/head.php');
 
-include_once('../control/control_delete.php');
+$datos = data_submitted();
 
-$objeto = new control_delete();
+$objetoUsuario = new AbmUsuario();
+$listaUsuarios = $objetoUsuario->buscar(null);
 
-$name = $objeto->devolverDato($_GET);
+$objArchivo = new AbmArchivoCargado();
+$archivoSeleccionado = $objArchivo->buscar($datos);
+
+//print_r($archivoSeleccionado);
 
 ?>
 <div class="wrapper">
@@ -18,24 +23,30 @@ $name = $objeto->devolverDato($_GET);
                     <div class="card-header d-flex justify-content-center">
                         <h3 class="card-title">Formulario de Eliminacion de Archivo</h3>
                     </div>
-                    <form role="form" id="form-carga" action="accion_delete.php" method="POST">
+                    <form role="form" id="form-carga" action="abmArchivo.php" method="POST">
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nombre del archivo</label>
-                                <input type="text" class="form-control" value="<?php echo $name ?>" readonly>
-                                <input type="hidden" value="<?php echo $_GET['carpeta'] ?>" name="carpeta">
+                                <input type="text" class="form-control"
+                                    value="<?php echo $archivoSeleccionado[0]->getAcnombre() ?>" readonly>
+                                <input type="hidden" value="baja" name="accion">
+                                <input type="hidden" value="4" name="idestadotipos">
+                                <input type="hidden"
+                                    value="<?php echo $archivoSeleccionado[0]->getIdarchivocargado() ?>"
+                                    name="idarchivocargado">
                             </div>
                             <div class="form-group">
                                 <label for="">Motivo por el cual elimina el archivo</label>
-                                <textarea class="form-control" cols="10" rows="4" name="motivo"></textarea>
+                                <textarea class="form-control" cols="10" rows="4" name="acedescripcion"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Seleccione usuario que lo elimina</label>
-                                <select class="form-control" name="usuario_seleccionado">
+                                <select class="form-control" name="idusuario">
                                     <option value="" selected>Seleccione usuario</option>
-                                    <option value="administrador" selected>Administrador</option>
-                                    <option value="visitante">Visitante</option>
-                                    <option value="yo">Yo</option>
+                                    <?php foreach ($listaUsuarios as $objUsuario) { ?>
+                                    <option value="<?php echo $objUsuario->getIdusuario() ?>">
+                                        <?php echo $objUsuario->getUsnombre(); ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>

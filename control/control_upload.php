@@ -4,17 +4,14 @@ class control_upload
 {
     public function subirArchivo($datos)
     {
-        $nombre = $datos['name'];
+        $nombre = $datos['acnombre'];
         $nombreArchivo = $_FILES['archivo']['name'];
-        $observaciones = $datos['observaciones'];
 
         $arrayArchivo = explode('.', $nombreArchivo);
 
-        $nombreArchivoObservaciones = $nombre . "_OBS.txt";
-
         $archivo = $nombre . '.' . $arrayArchivo[1];
 
-        $dir = "../" . $datos['ubicacion'];
+        $dir = "../" . $datos['aclinkacceso'];
 
         $error = "";
         $todoOK = true;
@@ -32,16 +29,10 @@ class control_upload
             $todoOK = false;
         }
 
-        if ($todoOK && $observaciones != "") {
-            $fArchivoaCrear = fopen($dir . $nombreArchivoObservaciones, "w");
-            fwrite($fArchivoaCrear, $observaciones);
-            fclose($fArchivoaCrear);
-        }
-
         if ($todoOK)
-            $texto = "El archivo se ha cargado correctamente!";
+            $texto = true;
         else
-            $texto = $error;
+            $texto = false;
 
         return $texto;
     }
@@ -52,7 +43,7 @@ class control_upload
             $url = $datos['carpeta'];
             $dato = substr($url, 3);
         } else {
-            $dato = 0;
+            $dato = 'archivos/';
         }
         return $dato;
     }
@@ -69,11 +60,12 @@ class control_upload
         return $dato;
     }
 
-    public function action($nameFile){
-        if($nameFile == ''){
-            $accion = 'alta';
-        }else{
+    public function action($datos)
+    {
+        if (isset($datos['idarchivocargado'])) {
             $accion = 'modificar';
+        } else {
+            $accion = 'cargar';
         }
         return $accion;
     }

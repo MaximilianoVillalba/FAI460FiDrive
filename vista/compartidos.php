@@ -1,10 +1,10 @@
 <?php
+include_once('../configuracion.php');
 include('estructura/head.php');
-include_once('../control/control_listados.php');
 
 $objeto = new control_listados();
 
-$listado = $objeto->listFilesPersonalized("../archivos/");
+$listado = $objeto->listFilesPersonalized();
 ?>
 <div class="wrapper">
     <?php include('estructura/up_menu.php') ?>
@@ -13,7 +13,7 @@ $listado = $objeto->listFilesPersonalized("../archivos/");
         <section class="content d-flex justify-content-center">
             <div class="col-md-8 mt-5">
                 <?php
-                    echo $listado;
+                echo $listado;
                 ?>
             </div>
         </section>

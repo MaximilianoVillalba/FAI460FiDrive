@@ -1,10 +1,16 @@
 <?php
+include_once('../configuracion.php');
 include('estructura/head.php');
-include_once('../control/control_delete_shared.php');
 
-$objeto = new control_delete_shared();
+$datos = data_submitted();
 
-$nameFile = $objeto->devolverDato($_GET);
+$objetoUsuario = new AbmUsuario();
+$listaUsuarios = $objetoUsuario->buscar(null);
+
+$objArchivo = new AbmArchivoCargado();
+$archivoSeleccionado = $objArchivo->buscar($datos);
+
+print_r($archivoSeleccionado);
 
 ?>
 <div class="wrapper">
@@ -17,26 +23,33 @@ $nameFile = $objeto->devolverDato($_GET);
                     <div class="card-header d-flex justify-content-center">
                         <h3 class="card-title">Formulario de Eliminacion de Compartido</h3>
                     </div>
-                    <form id="form-carga" method="POST">
+                    <form id="form-carga" method="POST" action="abmArchivoEstado.php">
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label for="exampleInputEmail1">Nombre del archivo</label>
-                                    <input type="text" class="form-control" value="<?php echo $nameFile ?>" readonly>
+                                    <input type="text" class="form-control"
+                                        value="<?php echo $archivoSeleccionado[0]->getAcnombre() ?>" readonly>
+                                    <input type="hidden" value="noCompartir" name="accion">
+                                    <input type="hidden" value="3" name="idestadotipos">
+                                    <input type="hidden"
+                                        value="<?php echo $archivoSeleccionado[0]->getIdarchivocargado() ?>"
+                                        name="idarchivocargado">
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Seleccione usuario que lo carga</label>
-                                    <select class="form-control">
-                                        <option value="" selected>Seleccione usuario</option>
-                                        <option value="administrador">Administrador</option>
-                                        <option value="visitante">Visitante</option>
-                                        <option value="yo">Yo</option>
+                                    <select class="form-control" name="idusuario">
+                                        <option value="" selected disabled>Seleccione usuario</option>
+                                        <?php foreach ($listaUsuarios as $objUsuario) { ?>
+                                        <option value="<?php echo $objUsuario->getIdusuario() ?>">
+                                            <?php echo $objUsuario->getUsnombre(); ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="">Motivo por el cual deja de compartir</label>
-                                <textarea class="form-control" cols="10" rows="4"></textarea>
+                                <textarea class="form-control" cols="10" rows="4" name="acedescripcion"></textarea>
                             </div>
                         </div>
                         <div class="m-2 d-flex justify-content-center">

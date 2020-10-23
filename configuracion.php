@@ -1,9 +1,16 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
+header("Cache-Control: no-cache, must-revalidate ");
 
+/////////////////////////////
+// CONFIGURACION APP//
+/////////////////////////////
 
-$GLOBALS['ROOT'] =$_SERVER['DOCUMENT_ROOT'] ."/FAI460FiDrive/";
+$PROYECTO = 'FAI460FiDrive';
 
-include_once("./utiles/funciones.php");
+//variable que almacena el directorio del proyecto
+$ROOT = $_SERVER['DOCUMENT_ROOT'] . "/$PROYECTO/";
 
+include_once($ROOT . 'utiles/funciones.php');
 
-?>
+$_SESSION['ROOT'] = $ROOT;
