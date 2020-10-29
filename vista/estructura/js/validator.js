@@ -1,21 +1,21 @@
 $("#form-carga").bootstrapValidator({
     message: 'Este valor no es valido',
     fields: {
-        name: {
+        acnombre: {
             validators: {
                 notEmpty: {
                     message: 'El nombre no puede ser vacio',
                 }
             }
         },
-        usuario_seleccionado: {
+        idusuario: {
             validators: {
                 notEmpty: {
                     message: 'Debe seleccionar el usuario'
                 }
             }
         },
-        motivo: {
+        acedescripcion: {
             validators: {
                 notEmpty: {
                     message: 'Debe completar el motivo'
@@ -41,7 +41,7 @@ $(document).on('change', 'input[type="file"]', function () {
 
 $('#input_password').keyup(function () {
     clave = $('#input_password').val();
-    if ( (/^[a-z]+$/i.test(clave) || /^[0-9]+$/.test(clave))  && clave.length < 6) {
+    if ((/^[a-z]+$/i.test(clave) || /^[0-9]+$/.test(clave)) && clave.length < 6) {
         $('#fortaleza_clave').text('Password debil');
         $('#fortaleza_clave').css("color", "#ff0000");
     } else if (/^[0-9a-zA-Z]+$/.test(clave) && clave.length > 6) {
@@ -50,19 +50,19 @@ $('#input_password').keyup(function () {
     }
 })
 
-$('#generarHash').on('click', function(){
+$('#generarHash').on('click', function () {
     random = Math.floor((Math.random() * 1000) + 1); //Numero aleatorio entre 1 y 1000
     dias = $('#input_dias').val();
     descargas = $('#input_descargas').val();
     name = $('#input_name').val();
 
-    if(dias == '' || descargas == ''){
-        valor_hash =9007199254740991;
-    }else{
+    if (dias == '' || descargas == '') {
+        valor_hash = 9007199254740991;
+    } else {
         valor_hash = random + dias * descargas;
     }
 
     $('#div_hash').removeClass('d-none');
     $('#link_hash').text(valor_hash);
-    $('#link_hash').attr('href',"#");
+    $('#link_hash').attr('href', "#");
 })

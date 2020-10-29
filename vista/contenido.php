@@ -4,7 +4,7 @@ include('estructura/head.php');
 
 $objeto = new control_listados();
 
-$listado = $objeto->listFiles("../archivos/");
+$listado = $objeto->listFiles();
 
 ?>
 <div class="wrapper">

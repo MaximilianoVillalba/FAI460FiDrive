@@ -154,6 +154,7 @@ class archivocargado
         $sql = "SELECT * FROM archivocargado ";
         if ($parametro != "") {
             $sql .= 'WHERE ' . $parametro;
+            echo "Consulta" . $sql;
         }
         $res = $base->Ejecutar($sql);
         if ($res > -1) {

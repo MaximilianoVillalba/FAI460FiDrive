@@ -85,7 +85,8 @@ class AbmArchivoCargado
             if (isset($param['accantidaddescarga'])) $where .= " and accantidaddescarga='" . $param['accantidaddescarga'] . "'";
             if (isset($param['accantidadusada'])) $where .= " and accantidadusada='" . $param['accantidadusada'] . "'";
             if (isset($param['acfechainiciocompartir'])) $where .= " and acfechainiciocompartir='" . $param['acfechainiciocompartir'] . "'";
-            if (isset($param['acefechafincompartir	'])) $where .= " and acefechafincompartir	='" . $param['acefechafincompartir	'] . "'";
+            if (isset($param['acfechainiciocompartirdist'])) $where .= " and acfechainiciocompartir!='" . $param['acfechainiciocompartirdist'] . "'"; //Agregue esto nuevo ya que para traer los archivos que no estaban compartidos tenia que hacer un =! o no podia que la sentencia anterior
+            if (isset($param['acefechafincompartir'])) $where .= " and acefechafincompartir='" . $param['acefechafincompartir'] . "'";
             if (isset($param['acprotegidoclave'])) $where .= " and acprotegidoclave='" . $param['acprotegidoclave'] . "'";
         }
         $arreglo = archivocargado::listar($where);
