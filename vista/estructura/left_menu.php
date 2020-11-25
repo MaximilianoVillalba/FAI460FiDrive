@@ -32,6 +32,12 @@
                                 <p>Lista archivos compartidos</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="../vista/usuario.php" class="nav-link">
+                                <i class="far fa-arrow-alt-circle-right"></i>
+                                <p>Cargar usuario</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

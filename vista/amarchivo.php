@@ -4,6 +4,8 @@ include('estructura/head.php');
 
 $datos = data_submitted();
 
+$userLoggueado = $objSession->getUsuario();
+
 $objetoUsuario = new AbmUsuario();
 $listaUsuarios = $objetoUsuario->buscar(null);
 
@@ -69,21 +71,8 @@ if ($accion == 'modificar') {
                                 <div class="form-group col-6">
                                     <label>Seleccione usuario que lo carga</label>
                                     <select class="form-control" name="idusuario">
-                                        <?php if ($accion == 'modificar') { ?>
-                                        <option
-                                            value="<?php echo $archivoSeleccionado[0]->getIdusuario()[0]->getIdusuario() ?>"
-                                            selected>
-                                            <?php echo $archivoSeleccionado[0]->getIdusuario()[0]->getUsnombre() ?>
-                                        </option>
-                                        <?php } else { ?>
-                                        <option selected disabled>
-                                            Seleccion usuario
-                                        </option>
-                                        <?php } ?>
-                                        <?php foreach ($listaUsuarios as $objUsuario) { ?>
-                                        <option value="<?php echo $objUsuario->getIdusuario() ?>">
-                                            <?php echo $objUsuario->getUsnombre(); ?></option>
-                                        <?php } ?>
+                                        <option value="<?php echo $userLoggueado->getIdusuario() ?>" selected>
+                                            <?php echo $userLoggueado->getUsnombre() ?></option>
                                     </select>
                                 </div>
                             </div>

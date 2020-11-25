@@ -36,7 +36,6 @@ function __autoload($class_name)
     //print_object($directorys) ;
     foreach ($directorys as $directory) {
         if (file_exists($directory . $class_name . '.php')) {
-            // echo "se incluyo".$directory.$class_name . '.php';
             require_once($directory . $class_name . '.php');
             return;
         }
