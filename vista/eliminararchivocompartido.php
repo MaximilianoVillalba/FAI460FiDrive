@@ -4,8 +4,7 @@ include('estructura/head.php');
 
 $datos = data_submitted();
 
-$objetoUsuario = new AbmUsuario();
-$listaUsuarios = $objetoUsuario->buscar(null);
+$userLoggueado = $objSession->getUsuario();
 
 $objArchivo = new AbmArchivoCargado();
 $archivoSeleccionado = $objArchivo->buscar($datos);
@@ -39,11 +38,8 @@ print_r($archivoSeleccionado);
                                 <div class="form-group col-6">
                                     <label>Seleccione usuario que lo carga</label>
                                     <select class="form-control" name="idusuario">
-                                        <option value="" selected disabled>Seleccione usuario</option>
-                                        <?php foreach ($listaUsuarios as $objUsuario) { ?>
-                                        <option value="<?php echo $objUsuario->getIdusuario() ?>">
-                                            <?php echo $objUsuario->getUsnombre(); ?></option>
-                                        <?php } ?>
+                                        <option value="<?php echo $userLoggueado->getIdusuario() ?>" selected>
+                                            <?php echo $userLoggueado->getUsnombre() ?></option>
                                     </select>
                                 </div>
                             </div>

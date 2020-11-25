@@ -1,6 +1,6 @@
 <footer class="main-footer">
-  </div>
-  <strong>Footer</strong>
+    </div>
+    <strong>Footer FiDrive | @2020</strong>
 </footer>
 
 <!-- REQUIRED SCRIPTS -->
