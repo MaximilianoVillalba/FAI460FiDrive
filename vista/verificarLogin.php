@@ -12,5 +12,6 @@ $objSession->iniciar($datos['uslogin'], $datos['usclave']);
 if ($objSession->validar($datos)) {
     header("Location:principal.php");
 } else {
+    $objSession->cerrar();
     header("Location:index.php?message=0");
 }

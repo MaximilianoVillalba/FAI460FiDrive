@@ -27,11 +27,11 @@ class Session
 
     public function activa()
     {
-        if (version_compare(phpversion(), '5.4.0', '>=')) {
-            return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-        } else {
-            return session_id() === '' ? FALSE : TRUE;
+        $resp = false;
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            $resp = true;
         }
+        return $resp;
     }
 
     public function getUsuario()
@@ -50,15 +50,42 @@ class Session
             /* Obtenemos al usuario loggueado */
             $usuarioLoggueado = $this->getUsuario();
             /* Tomamos el id del usuario */
-            $param['idrol'] = $usuarioLoggueado->getRol();
+            $param['idusuario'] = $usuarioLoggueado->getIdusuario();
+
+            $objUserRol = new AbmUsuarioRol();
+
+            $arregloRoles = $objUserRol->buscar($param);
 
             $objRol = new AbmRol();
-
-            $rolUser = $objRol->buscar($param);
-
-            $rol = $rolUser[0]->getRoDescripcion();
+            $arregloRolesUser = array();
+            foreach ($arregloRoles as $obj) {
+                $dato['idrol'] = $obj->getIdRol();
+                $rol = $objRol->buscar($dato);
+                array_push($arregloRolesUser, $rol[0]);
+            }
         }
-        return $rol;
+        return $arregloRolesUser;
+    }
+
+    public function validarPermisos()
+    {
+        $esAdmin = false;
+        if ($this->getUsuario() != null) {
+            $roles = $this->getRol();
+            foreach ($roles as $rol) {
+                if ($rol->getRoDescripcion() == 'administrador') {
+                    $esAdmin = true;
+                }
+            }
+        }
+        return $esAdmin;
+    }
+
+    public function paginaAsegurada()
+    {
+        if (!$this->validarPermisos()) {
+            header("Location:principal.php");
+        }
     }
 
     public function cerrar()

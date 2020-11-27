@@ -13,4 +13,4 @@ $ROOT = $_SERVER['DOCUMENT_ROOT'] . "/$PROYECTO/";
 
 include_once($ROOT . 'utiles/funciones.php');
 
-$_SESSION['ROOT'] = $ROOT;
+$GLOBALS['ROOT'] = $ROOT;

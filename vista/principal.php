@@ -2,6 +2,8 @@
 include_once('../configuracion.php');
 include('./estructura/head.php');
 
+$userLoggueado = $objSession->getUsuario();
+
 ?>
 <div class="wrapper">
     <?php include('estructura/up_menu.php') ?>
@@ -9,7 +11,7 @@ include('./estructura/head.php');
     <div class="content-wrapper d-flex justify-content-center">
         <section class="content col-6 mt-5">
             <div class="alert alert-success d-flex justify-content-center mt-5" role="alert">
-                <h1>¡BIENVENIDO!</h1>
+                <h1>¡BIENVENIDO <?php echo $userLoggueado->getUsnombre() ?>!</h1>
             </div>
             <hr>
             <div class="d-flex justify-content-center">

@@ -2,6 +2,8 @@
 include('./estructura/head.php');
 $datos = data_submitted();
 
+$objSession->paginaAsegurada();
+
 $objetoUsuario = new AbmUsuario();
 
 $objAbmRol = new AbmRol();
@@ -42,24 +44,6 @@ $listaRoles = $objAbmRol->buscar(null);
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
                                 <input type="password" class="form-control" name="usclave">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Rol</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="idrol">
-                                    <?php
-                                    if (count($listaRoles) > 0) {
-                                        foreach ($listaRoles as $objRol) { ?>
-                                    <option value="<?php echo $objRol->getIdRol() ?>">
-                                        <?php echo $objRol->getRoDescripcion() ?></option>
-                                    <?php
-                                        } //Fin foreach
-                                    } else { //Fin if 
-                                        ?>
-                                    <option value="">No hay roles cargados</option>
-                                    <?php } ?>
-                                </select>
                             </div>
                         </div>
                     </div>

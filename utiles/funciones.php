@@ -27,10 +27,10 @@ function __autoload($class_name)
 {
     //echo "class ".$class_name ;
     $directorys = array(
-        $_SESSION['ROOT'] . 'Modelo/',
-        $_SESSION['ROOT'] . 'Modelo/conector/',
-        $_SESSION['ROOT'] . 'Control/',
-        $_SESSION['ROOT'] . 'Vista/',
+        $GLOBALS['ROOT'] . 'modelo/',
+        $GLOBALS['ROOT'] . 'modelo/conector/',
+        $GLOBALS['ROOT'] . 'control/',
+        $GLOBALS['ROOT'] . 'vista/',
         //  $GLOBALS['ROOT'].'util/class/',
     );
     //print_object($directorys) ;

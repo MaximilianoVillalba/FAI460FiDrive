@@ -8,7 +8,7 @@ class AbmUsuario
 
         if (array_key_exists('idusuario', $param)) {
             $obj = new usuario();
-            $obj->setear($param['idusuario'], $param['usnombre'], $param['usapellido'], $param['uslogin'], $param['usclave'], $param['usactivo'], $param['idrol']);
+            $obj->setear($param['idusuario'], $param['usnombre'], $param['usapellido'], $param['uslogin'], $param['usclave'], $param['usactivo']);
         }
         return $obj;
     }
@@ -65,7 +65,6 @@ class AbmUsuario
             if (isset($param['uslogin'])) $where .= " and uslogin ='" . $param['uslogin'] . "'";
             if (isset($param['usclave'])) $where .= " and usclave ='" . $param['usclave'] . "'";
             if (isset($param['usactivo'])) $where .= " and usactivo ='" . $param['usactivo'] . "'";
-            if (isset($param['rol'])) $where .= " and rol ='" . $param['rol'] . "'";
         }
         $arreglo = usuario::listar($where);
         return $arreglo;

@@ -7,7 +7,6 @@ class usuario
     private $uslogin;
     private $usclave;
     private $usactivo;
-    private $rol;
     private $mensajeoperacion;
 
     public function __construct()
@@ -18,10 +17,9 @@ class usuario
         $this->uslogin = "";
         $this->usclave = "";
         $this->usactivo = "";
-        $this->rol = "";
     }
 
-    public function setear($idusuario, $usnombre, $usapellido, $uslogin, $usclave, $usactivo, $rol)
+    public function setear($idusuario, $usnombre, $usapellido, $uslogin, $usclave, $usactivo)
     {
         $this->setIdusuario($idusuario);
         $this->setUsnombre($usnombre);
@@ -29,7 +27,6 @@ class usuario
         $this->setUslogin($uslogin);
         $this->setUsclave($usclave);
         $this->setUsactivo($usactivo);
-        $this->setRol($rol);
     }
 
     public function cargar()
@@ -42,7 +39,7 @@ class usuario
             if ($res > -1) {
                 if ($res > 0) {
                     $row = $base->Registro();
-                    $this->setear($row['idusuario'], $row['usnombre'], $row['usapellido'], $row['uslogin'], $row['usclave'], $row['usactivo'], $row['idrol']);
+                    $this->setear($row['idusuario'], $row['usnombre'], $row['usapellido'], $row['uslogin'], $row['usclave'], $row['usactivo']);
                 }
             }
         } else {
@@ -55,13 +52,12 @@ class usuario
     {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO usuario(usnombre,usapellido,uslogin,usclave,usactivo, rol) VALUES(
+        $sql = "INSERT INTO usuario(usnombre,usapellido,uslogin,usclave,usactivo) VALUES(
             '" . $this->getUsnombre() . "',
             '" . $this->getUsapellido() . "',
             '" . $this->getUslogin() . "',
             '" . $this->getUsclave() . "',
-            '" . $this->getUsactivo() . "',
-            '" . $this->getRol() . "');";
+            '" . $this->getUsactivo() . "');";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdusuario($elid);
@@ -84,8 +80,7 @@ class usuario
             usapellido='" . $this->getUsapellido() . "',
             uslogin='" . $this->getUslogin() . "',
             usclave='" . $this->getUsclave() . "',
-            usactivo='" . $this->getUsactivo() . "',
-            idrol='" . $this->getRol() . "' WHERE idusuario =" . $this->getIdusuario();
+            idrol='" . $this->getUsactivo() . "' WHERE idusuario =" . $this->getIdusuario();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -128,8 +123,7 @@ class usuario
             if ($res > 0) {
                 while ($row = $base->Registro()) {
                     $obj = new usuario();
-                    $objRol = new rol();
-                    $obj->setear($row['idusuario'], $row['usnombre'], $row['usapellido'], $row['uslogin'], $row['usclave'], $row['usactivo'], $row['rol']);
+                    $obj->setear($row['idusuario'], $row['usnombre'], $row['usapellido'], $row['uslogin'], $row['usclave'], $row['usactivo']);
                     array_push($arreglo, $obj);
                 }
             }
@@ -166,10 +160,6 @@ class usuario
     {
         return $this->usactivo;
     }
-    public function getRol()
-    {
-        return $this->rol;
-    }
 
     public function getmensajeoperacion()
     {
@@ -204,10 +194,6 @@ class usuario
     public function setUsactivo($usactivo)
     {
         $this->usactivo = $usactivo;
-    }
-    public function setRol($rol)
-    {
-        $this->rol = $rol;
     }
 
     public function setmensajeoperacion($valor)

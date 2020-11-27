@@ -20,9 +20,8 @@
     <script src="./estructura/ckeditor/ckeditor.js"></script>
 </head>
 <?php
-include('../control/Session.php');
-$objSession = new Session();
 include_once('../configuracion.php');
+$objSession = new Session();
 
 if (!isset($_SESSION['uslogin'])) {
     header("Location:index.php");
