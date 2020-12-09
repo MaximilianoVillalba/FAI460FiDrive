@@ -26,6 +26,7 @@ class AbmUsuario
         $resp = false;
         $param['idusuario'] = null;
         $param['usactivo'] = 1;
+        $param['usclave'] = md5($param['usclave']);
         $objetoUsuario = $this->cargarObjeto($param);
 
         if ($objetoUsuario != null and $objetoUsuario->insertar()) {

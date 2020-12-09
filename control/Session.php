@@ -6,17 +6,17 @@ class Session
         session_start();
     }
 
-    public function iniciar($nombreUsuario, $psw)
+    public function iniciar($nombreUsuario)
     {
         $_SESSION['uslogin'] = $nombreUsuario;
-        $_SESSION['usclave'] = $psw;
     }
 
-    public function validar()
+    public function validar($datos)
     {
         $resp = false;
         $objUsuario = new AbmUsuario();
-        $lista = $objUsuario->buscar($_SESSION);
+        $datos['usclave'] = md5($datos['usclave']);
+        $lista = $objUsuario->buscar($datos);
 
         if ($lista != null) {
             $resp = true;
@@ -36,7 +36,7 @@ class Session
 
     public function getUsuario()
     {
-        if ($this->validar() && $this->activa()) {
+        if ($this->activa()) {
             $usuario = new AbmUsuario();
             $lista = $usuario->buscar($_SESSION);
             $usuarioLoggueado = $lista[0];
@@ -94,5 +94,10 @@ class Session
             session_destroy();
             header("Location:index.php");
         }
+    }
+
+    public function getLogin()
+    {
+        return $_SESSION['uslogin'];
     }
 }

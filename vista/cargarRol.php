@@ -1,6 +1,8 @@
 <?php
 include('./estructura/head.php');
 
+$objSession->paginaAsegurada();
+
 ?>
 <div class="wrapper">
     <?php include('estructura/up_menu.php') ?>

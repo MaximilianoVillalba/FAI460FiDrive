@@ -22,8 +22,9 @@
 <?php
 include_once('../configuracion.php');
 $objSession = new Session();
+$loggueado = $objSession->getLogin();
 
-if (!isset($_SESSION['uslogin'])) {
+if (!isset($loggueado)) {
     header("Location:index.php");
 }
 

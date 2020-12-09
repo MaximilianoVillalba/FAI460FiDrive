@@ -1,13 +1,12 @@
 <?php
-include('../control/Session.php');
+//include('../control/Session.php');
+include('../configuracion.php');
 
 $objSession = new Session();
 
-include('../configuracion.php');
-
 $datos = data_submitted();
 
-$objSession->iniciar($datos['uslogin'], $datos['usclave']);
+$objSession->iniciar($datos['uslogin']);
 
 if ($objSession->validar($datos)) {
     header("Location:principal.php");

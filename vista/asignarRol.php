@@ -3,11 +3,19 @@ include('./estructura/head.php');
 
 $objSession->paginaAsegurada();
 
-$objUsuario = new AbmUsuario();
-$listaUsuarios = $objUsuario->buscar(null);
-
 $objAbmRol = new AbmRol();
 $listaRoles = $objAbmRol->buscar(null);
+
+if (isset($_GET['idusuario'])) {
+    $objUsuario = new AbmUsuario();
+    $usuario = $objUsuario->buscar($_GET);
+    print_r($usuario);
+    $accion = "modificar";
+} else {
+    $objUsuario = new AbmUsuario();
+    $listaUsuarios = $objUsuario->buscar(null);
+    $accion = "alta";
+}
 
 ?>
 <div class="wrapper">
@@ -26,16 +34,15 @@ $listaRoles = $objAbmRol->buscar(null);
                             <div class="col-sm-10">
                                 <select class="form-control" name="idusuario">
                                     <?php
-                                    if (count($listaUsuarios) > 0) {
+                                    if ($accion == 'modificar') { ?>
+                                    <option selected value="<?php echo $usuario[0]->getIdusuario() ?>">
+                                        <?php echo $usuario[0]->getUsnombre() ?></option>
+                                    <?php } else {
                                         foreach ($listaUsuarios as $objUser) { ?>
                                     <option value="<?php echo $objUser->getIdusuario() ?>">
                                         <?php echo $objUser->getUsnombre() ?></option>
-                                    <?php
-                                        } //Fin foreach
-                                    } else { //Fin if 
-                                        ?>
-                                    <option value="">No hay usuarios cargados</option>
-                                    <?php } ?>
+                                    <?php } //Fin foreach 
+                                    } ?>
                                 </select>
                             </div>
                         </div>

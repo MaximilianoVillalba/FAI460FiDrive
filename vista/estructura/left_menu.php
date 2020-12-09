@@ -38,18 +38,28 @@ $esAdmin = $objSession->validarPermisos();
                         </li>
                         <?php if ($esAdmin) { ?>
                         <li class="nav-item">
+                            <a href="../vista/listadoUsuarios.php" class="nav-link">
+                                <i class="far fa-arrow-alt-circle-right"></i>
+                                <p>Listado usuarios</p>
+                            </a>
+                        </li>
+                        <?php } ?>
+                        <?php if ($esAdmin) { ?>
+                        <li class="nav-item">
                             <a href="../vista/usuario.php" class="nav-link">
                                 <i class="far fa-arrow-alt-circle-right"></i>
                                 <p>Cargar usuario</p>
                             </a>
                         </li>
                         <?php } ?>
+                        <?php if ($esAdmin) { ?>
                         <li class="nav-item">
                             <a href="../vista/cargarRol.php" class="nav-link">
                                 <i class="far fa-arrow-alt-circle-right"></i>
                                 <p>Cargar rol</p>
                             </a>
                         </li>
+                        <?php } ?>
                         <?php if ($esAdmin) { ?>
                         <li class="nav-item">
                             <a href="../vista/asignarRol.php" class="nav-link">
